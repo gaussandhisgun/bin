@@ -1,0 +1,2 @@
+#!/bin/bash
+ls /usr/share/figlet/fonts/*.flf | cut -d . -f 1 | fzf --reverse --preview "figlet -w $(expr $(tput cols) / 2) -f {1} ABCDEFGHIJKLMNOPQRSTUVWXYZabcderfghijklmnopqrstuvwxyz1234567890\!\@\#\$\%\^\&\*\(\)"

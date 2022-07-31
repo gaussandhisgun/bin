@@ -1,0 +1,6 @@
+#!/bin/bash
+if [[ $@ == -a ]]; then
+while sleep 5 && $(pidof mpg123 2> /dev/null > /dev/null); do grep -iE "(stream|streamtitle)" ~/.tti > ~/.ti; sleep 10; done & bash -c "mpg123 -CZ ./* 2>&1" | tee ~/.tti; rm ~/.ti; rm ~/.tti; exit
+else
+while sleep 5 && $(pidof mpg123 2> /dev/null > /dev/null); do grep -iE "(stream|streamtitle)" ~/.tti > ~/.ti; sleep 10; done & mpg123 -Cz "$@" 2>&1 | tee ~/.tti; rm ~/.ti; rm ~/.tti; exit
+fi

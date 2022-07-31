@@ -1,0 +1,6 @@
+#!/bin/bash
+if [[ -f ~/.cache/xfce4/notifyd/log ]]; then
+notftime=$(date -d $(tail -n 10 ~/.cache/xfce4/notifyd/log | grep -E "\[[-0-9T:.+]*\]" | tail -n 1 | sed 's/\[//g; s/\]//g') +%H:%M)
+echo -n $notftime;
+tail -n 10 ~/.cache/xfce4/notifyd/log | grep -E "(app_name\=|summary\=|body\=)" | tail -n 3 | sed 's/summary\=//g; s/body\=//g; s/app_name\=/ \(i\) /g' # | cut -c 1-$(tput cols)
+fi

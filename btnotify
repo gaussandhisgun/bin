@@ -1,0 +1,17 @@
+#!/bin/bash
+# dingus
+# 0C:DF:A4:E9:02:54
+# OldmaN
+# 18:46:17:2A:A4:EF
+MACADDR=0C:DF:A4:E9:02:54
+
+MOMENT=$(date +%s%N)
+if [ $# \> 0 ]; then
+cat ~/.config/OwnNote.vnt | sed "s/\%MESSAGE\%/$*/" > /tmp/OwnNote$MOMENT.vnt
+else
+# echo -n "~" > /tmp/notif$MOMENT.vntc
+while read spo; do echo -n "$spo\n" >> /tmp/notif$MOMENT.vntc; done
+MESS=$(cat /tmp/notif$MOMENT.vntc | sed 's/~\\n//')
+cat ~/.config/OwnNote.vnt | sed "s	\%MESSAGE\%	$MESS	" > /tmp/OwnNote$MOMENT.vnt
+fi
+bt-obex -p $MACADDR /tmp/OwnNote$MOMENT.vnt  >/dev/null 2>/dev/null || while [ $? != 0 ]; do bt-obex -p $MACADDR /tmp/OwnNote$MOMENT.vnt  >/dev/null 2>/dev/null; done

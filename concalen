@@ -1,0 +1,26 @@
+#!/bin/bash
+date +" %A %d %B %Y"
+export WEEKSTARTDAY="today -`date +%u`day +1day"
+echo " ПН  ВТ  СР  ЧТ  ПТ  СБ  ВС"
+for u in -3 -2 -1 +0 +1 +2 +3; do
+for i in 0 1 2 3 4 5 6; do
+if [[ $(date -d "$WEEKSTARTDAY +$i day $u week") == $(date -d today) ]]; then
+        echo -n '['
+        echo -n $(date -d "$WEEKSTARTDAY +$i day $u week" +%d)
+        echo -n ']'
+else
+        if [[ $(date -d "$WEEKSTARTDAY +$i day $u week" +%m) == $(date -d today +%m) ]]; then
+                echo -n ' '
+                echo -n $(date -d "$WEEKSTARTDAY +$i day $u week" +%d)
+                echo -n ' '
+        else
+                echo -n ' __ '
+        fi
+fi
+done
+echo " "
+done
+echo " "
+if [[ $1 != "--noweb" ]]; then
+w3m -dump -cols 120 http://kakoysegodnyaprazdnik.ru | grep -B2 '\[like\'] | sed 's/\[like\]//g' | sed 's/\[like-fill\]//g' | sed 's/\[info\]//g' | sed 's/•//g' | sed '/^[[:space:]]*$/d' | head -n 11 | tail -n 10
+fi

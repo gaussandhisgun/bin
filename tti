@@ -1,0 +1,5 @@
+#!/bin/bash
+rm ~/.ti
+bash -c "$*" 2| tee ~/.ti | tee ~/.ti
+echo " " >> ~/.ti
+echo " "

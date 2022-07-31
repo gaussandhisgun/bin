@@ -1,0 +1,2 @@
+#!/bin/bash
+yay -S $(yay -Pc | fzf --reverse --multi --preview "( yay -Qi {1} 2>/dev/null || yay -Si {1} 2>/dev/null ) | fmt -sw $(expr $(tput cols) / 2 - 5 )"  | sed 's/\t.*/ /g' | tr -d '\012\015' )

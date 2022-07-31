@@ -1,0 +1,4 @@
+#!/bin/bash
+if [[ -f ~/.ti ]]; then
+tail -n 1 ~/.ti
+fi

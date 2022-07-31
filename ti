@@ -1,0 +1,11 @@
+#!/bin/bash
+while true; do
+if [[ -f ~/.tistop ]]
+then
+rm ~/.tistop
+rm ~/.ti
+exit
+else
+bash -c "$*" 2>>~/.ti >>~/.ti; sleep 1
+fi
+done &

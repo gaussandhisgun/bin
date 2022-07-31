@@ -1,0 +1,6 @@
+#!/bin/bash
+# set -x
+notify-send "Started casting notifications"
+while true; do
+inotifywait -qme CLOSE_WRITE ~/.cache/xfce4/notifyd/log | (while read; do lastnotify | btnotify & date; done)
+done

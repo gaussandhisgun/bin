@@ -1,0 +1,2 @@
+#!/bin/bash
+wget https://github.com/awesome-selfhosted/awesome-selfhosted/raw/master/README.md -O /tmp/selfhosted; mdless /tmp/selfhosted; rm /tmp/selfhosted

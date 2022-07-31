@@ -1,0 +1,2 @@
+#!/bin/bash
+xfce4-terminal -e "bash -c \"adb sideload \\\"$@\\\" && notify-send \\\"$@ is installed\\\" || read\""

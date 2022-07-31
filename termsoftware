@@ -1,0 +1,2 @@
+#!/bin/bash
+wget https://github.com/chubin/awesome-console-services/raw/master/README.md -O /tmp/selfhosted; mdless /tmp/selfhosted; rm /tmp/selfhosted
