@@ -1,0 +1,15 @@
+#!/bin/bash
+let GW=1680;
+let GH=1050;
+
+adb shell settings put global overlay_display_devices ${GW}x${GH}/200;
+let PhoneDisplay=$(scrcpy -V error --display=255 | grep -so "\-\-display [0-9]*" | grep -v "\-\-display 0" | grep -o "[0-9]*");
+adb shell wm size reset -d $PhoneDisplay;
+adb shell pm set-home-activity com.farmerbb.taskbar/.activity.HSLActivity -user --user 0
+adb shell pm disable-user com.pixelated.launcher --user 0
+sleep 1
+adb shell pm set-home-activity com.farmerbb.taskbar/.activity.HSLActivity -user --user 0
+adb shell ime set com.apedroid.hwkeyboardhelper/.IME
+sleep 3
+adb shell input keyevent HOME
+scrcpy --display $PhoneDisplay -b 16000000 --window-title Android -fwK --forward-all-clicks && adb shell settings put global overlay_display_devices none && adb shell ime set com.touchtype.swiftkey/com.touchtype.KeyboardService && adb shell pm enable com.pixelated.launcher --user 0 && sleep 1 && adb shell pm set-home-activity com.pixelated.launcher/.PixelatedLauncher -user --user 0 && sleep 5 && adb shell input keyevent HOME && sleep 1 && adb shell input keyevent HOME
