@@ -1,0 +1,9 @@
+#!/bin/bash
+let GW=1680;
+let GH=1050;
+
+adb shell settings put global overlay_display_devices ${GW}x${GH}/200;
+
+adb shell input keyevent HOME
+# adb shell cmd uimode night no
+scrcpy --display $PhoneDisplay -b 16000000 --window-title Android -fwKM --forward-all-clicks && adb shell settings put global overlay_display_devices none && adb shell input keyevent HOME # && adb shell cmd uimode night yes
